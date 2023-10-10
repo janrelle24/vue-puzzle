@@ -1,3 +1,6 @@
 <template>
-  <h1>Hello World</h1>
+  <div>
+    <button class="btn btn-primary">Primary Button</button>
+  </div>
 </template>
+
