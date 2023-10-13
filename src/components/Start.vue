@@ -2,10 +2,11 @@
     <div class="text-center pt-5">
         <div>
             <label for="file">
+                <img :src="image" v-if="image">
                 <input type="file"
                     id="file"
                     accept="image/gif, image/jpeg, image/png"
-                >
+                    @change="fileChanged">
             </label>
         </div>
         <div class="pt-5">
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-
+import loadImage from 'blueimp-load-image'
     export default{
         name: "Start",
         data() {
@@ -40,10 +41,32 @@
                 level: 3,
             };
         },
+        methods: {
+            fileChanged (e) {
+                if (!e.target.files.length) {
+                    this.image = null
+                    return
+                }
+
+                loadImage(e.target.files[0], canvas => {
+                    this.image = canvas.toDataURL()
+                }, {
+                    maxWidth: 600,
+                    maxHeight: 600,
+                    minWidth: 200,
+                    minHeight: 200,
+                    canvas: true
+                })
+            },
+        }
     };
 </script>
 
 <style>
+img {
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
 label {
     font-size: 18px;
 }

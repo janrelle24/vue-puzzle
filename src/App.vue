@@ -22,13 +22,18 @@ export default{
     return {
       status: "beginning",
       size: 3,
+      image: null
     };
   },
   methods: {
-    startGame(size) {
+    startGame(size, image) {
       this.size = size;
+      this.image = image;
       this.status = "gaming";
     },
+    stopGame() {
+      this.status = "beginning";
+    }
   },
 };
 </script>
